@@ -19,11 +19,12 @@ R_s = np.sqrt(omega * mu_0 / (2 * sigma))
 
 # Effective permittivity (epsilon_eff)
 epsilon_eff = ((epsilon_r_prime + 1) / 2) + ((epsilon_r_prime - 1) / 2) * (1 / np.sqrt(1 + ((12 * d) / w)))
-
+epsilon_eff = 3.626
 
 # Calculate Alphas
-alpha_d = (k_0 * epsilon_r_prime * (epsilon_eff - 1) * tan_d) / (2 * np.sqrt(epsilon_eff) * (epsilon_r_prime + 1))
-alpha_c = (R_s / (Z_0 * w)) * np.sqrt((epsilon_r_prime + 1) / (2 * epsilon_r_prime))
+alpha_d = (k_0 * epsilon_r_prime * (epsilon_eff - 1) * tan_d) / (2 * np.sqrt(epsilon_eff) * (epsilon_r_prime - 1))
+# alpha_d = (k_0 * epsilon_r_prime * (epsilon_eff - 1) * tan_d) / (2 * np.sqrt(epsilon_eff) * (epsilon_r_prime + 1))
+alpha_c = (R_s / (Z_0 * w))
 
 # Total attenuation (alpha_total)
 alpha_total = alpha_d + alpha_c
@@ -34,6 +35,9 @@ alpha_c_db = alpha_c * 8.686
 alpha_total_db = alpha_total * 8.686
 
 # Print values
+print(epsilon_eff)
+print(k_0)
+print(R_s)
 print(f"Alpha_D (Dielectric loss): {alpha_d:.6f} Nepers/m ({alpha_d_db:.6f} dB/m)")
 print(f"Alpha_C (Conductor loss): {alpha_c:.6f} Nepers/m ({alpha_c_db:.6f} dB/m)")
 print(f"Total Alpha: {alpha_total:.6f} Nepers/m ({alpha_total_db:.6f} dB/m)")
